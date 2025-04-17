@@ -8,7 +8,6 @@ import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
 const index = () => {
   const [kerjaan, setkerjaan] = useState('');
   const [semuaKerjaan, setsemuaKerjaan] = useState([]);
-  const [isProtected, setIsProtected] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
 
@@ -18,29 +17,7 @@ const index = () => {
 
   useEffect(() => {
     simpanData();
-  }, [semuaKerjaan]);
-
-  useEffect(() => {
-    const izinkanScreenshot = async () => {
-      await ScreenCapture.allowScreenCaptureAsync();
-    };
-    izinkanScreenshot();
-  }, []);
-
-  useEffect(() => {
-    const subscribe = ScreenCapture.addScreenshotListener(() => {
-      console.log('Screenshot terdeteksi');
-      setIsProtected(true);
-      setTimeout(() => {
-        setIsProtected(false);
-      }, 2000);
-    });
-  
-    return () => {
-      subscribe.remove();
-    };
-  }, []);
-  
+  }, [semuaKerjaan]);  
 
   const ambilData = async () => {
     try {
